@@ -1,0 +1,22 @@
+{% load static %}
+<form hx-put="/update-todo/{{ todoo.id }}/" hx-target="this" hx-swap="outerHTML">
+
+    <article class="flex {% if todoo.done %} bg-green-50 {% endif %}">
+        <div class="w-4/5 py-3">
+            <p class="px-6 text-xs text-gray-700" style="font-size: 26px;"> {{ todoo.title }}</p>
+        </div>
+        <div class="w-1/5 px-6 py-3 flex justify-end space-x-4">
+            
+            {% if not todoo.done %}
+                <button  class="text-sky-700 hover:text-sky-900"> <img src="{% static 'correct.png' %}"></button>
+            {% endif %}
+                
+            <a style="cursor: pointer;" hx-confirm="Are you sure ?"  hx-delete="/delete-todo/{{ todoo.id }}/" hx-target="closest form" hx-swap="outerHTML swap:0.03s" class="text-sky-700 hover:text-sky-900"> <img src="{% static 'delete.png' %}"></a>
+        </div>
+    </article>
+    <style>
+        img{
+            width: 25px;
+        }
+    </style>
+</form>
